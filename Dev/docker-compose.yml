@@ -2,7 +2,16 @@ version: '3'
 services:
   client:
     build:
-      context: .
+      context: ./client
     volumes: 
-      - './src:/src'
-    
+      - './client:/client'
+      
+  server:
+    # images: php:7-apache
+    build: 
+      context: ./server
+    volumes: 
+      - './server/html:/usr/local/apache2/htdocs/'
+    ports:
+      - '40080:80'
+      

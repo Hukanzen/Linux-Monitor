@@ -8,6 +8,6 @@ RUN apt-get -y update && \
 	apt-get -y autoremove && \
 	apt-get -y clean
 
-WORKDIR /src
+WORKDIR /client
 
 CMD ["perl","main.pl"]

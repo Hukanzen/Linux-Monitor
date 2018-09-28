@@ -18,7 +18,7 @@ sub main
 	
 	print Dumper @usage;
 	
-	&clean;
+	# &clean;
 	
 	return 0;
 }
