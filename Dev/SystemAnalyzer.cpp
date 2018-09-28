@@ -4,54 +4,41 @@
 #include <sys/sysinfo.h>
 #include <sys/times.h>
 
+#include <unistd.h>
+
 #include "SystemAnalyzer.hpp"
 
 using namespace std;
 
 SystemAnalyzer::SystemAnalyzer()
 {
-	preTick_ = 0;
+	preTick_ = GetPreTick_();
 	preTime_ = times(NULL);
+	sleep(1);
 }
 
 uint SystemAnalyzer::GetCPUUsage(int nCPU)
 {
 	unsigned int cpuUsage = 0;
-
-	// 演算に使用されたTick値を取得
-	FILE *infile = fopen("/proc/stat", "r");
-	if (NULL == infile) {
-		cout << "[GetCPUUsage]<<Cannot open /proc/stat" << endl;
-		return 0;
-	}
-
-	int  usr, nice, sys;
-	char buf[1024]; // 文字列"cpu"の部分の入力用
-	int  result = fscanf(infile, "%s %d %d %d", buf, &usr, &nice, &sys);
-	if (result == -1) {
-		cout << "[GetCPUUsage]<<Cannot read fscanf" << endl;
-		return 0;
-	}
-	fclose(infile);
+	int          Tick_    = GetPreTick_();
 
 	// 現在の時刻を取得
 	clock_t now = times(NULL);
 
-	if (preTick_ == 0) { //一回目の呼び出しの場合
-		// 取得したTick値、時刻を保存
-		preTick_ = usr + nice + sys;
-		preTime_ = now;
-		return 0; //	0%を返す
-	}
+	// if (preTick_ == 0) { //一回目の呼び出しの場合
+	// 	// 取得したTick値、時刻を保存
+	// 	preTick_ = Tick_;
+	// 	preTime_ = now;
+	// 	return 0; //	0%を返す
+	// }
 
 	// CPU利用率を算出
 	// この計算式では、100% x
 	// CPUを最大値としたCPU使用率が計算されてしまうので、nCPUで割る
-	cpuUsage =
-	    ((double)(usr + nice + sys - preTick_) / (now - preTime_)) * 100.0 / nCPU;
+	cpuUsage = ((double)(Tick_ - preTick_) / (now - preTime_)) * 100.0 / nCPU;
 
 	// 取得したTick値、時刻を保存
-	preTick_ = usr + nice + sys;
+	preTick_ = Tick_;
 	preTime_ = now;
 
 	return cpuUsage;
@@ -88,4 +75,25 @@ uint SystemAnalyzer::GetDiskUsage(void)
 	diskUsage = 100.0 - availableDisk / allDisk * 100.0;
 
 	return diskUsage;
+}
+
+int SystemAnalyzer::GetPreTick_(void)
+{
+	// 演算に使用されたTick値を取得
+	FILE *infile = fopen("/proc/stat", "r");
+	if (NULL == infile) {
+		cout << "[GetCPUUsage]<<Cannot open /proc/stat" << endl;
+		return 0;
+	}
+
+	int  usr, nice, sys;
+	char buf[1024]; // 文字列"cpu"の部分の入力用
+	int  result = fscanf(infile, "%s %d %d %d", buf, &usr, &nice, &sys);
+	if (result == -1) {
+		cout << "[GetCPUUsage]<<Cannot read fscanf" << endl;
+		return 0;
+	}
+	fclose(infile);
+
+	return usr + nice + sys;
 }

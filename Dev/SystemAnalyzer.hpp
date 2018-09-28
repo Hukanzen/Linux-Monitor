@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * https://myenigma.hatenablog.com/entry/2015/04/27/185822
- * 
+ *
  * @file SystemAnalyzer.h
  *
  * @brief Linuxにおいてシステム情報を取得するためのクラスライブラリ
@@ -36,7 +36,6 @@
 #include <sys/statvfs.h>
 #include <sys/sysinfo.h>
 #include <sys/times.h>
-
 
 /**
  * @brief Linuxにおいてシステム情報を取得するためのクラス
@@ -73,6 +72,8 @@ class SystemAnalyzer
 	//	GetCPUUsage用
 	int     preTick_; // 前の/proc/statの値を保持
 	clock_t preTime_; // 前の時刻を保持
+
+	int GetPreTick_(void);
 
 	//~~~~~~Struct/Enum~~~~~~
 

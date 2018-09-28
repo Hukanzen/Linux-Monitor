@@ -10,17 +10,14 @@ int main(void)
 	SystemAnalyzer analyzer;
 	int            nCPU = 4;
 
-	while (1) {
-		uint cpuUsage = analyzer.GetCPUUsage(nCPU);
-		printf("cpuUsage : %d\n", cpuUsage);
+	uint cpuUsage = analyzer.GetCPUUsage(nCPU);
+	printf("cpuUsage : %d\n", cpuUsage);
 
-		uint memUsage = analyzer.GetMemoryUsage();
-		printf("memUsage : %d\n", memUsage);
+	uint memUsage = analyzer.GetMemoryUsage();
+	printf("memUsage : %d\n", memUsage);
 
-		uint diskUsage = analyzer.GetDiskUsage();
-		printf("diskUsage : %d\n", diskUsage);
-		sleep(1);
-	}
+	uint diskUsage = analyzer.GetDiskUsage();
+	printf("diskUsage : %d\n", diskUsage);
 
 	return 0;
 }
