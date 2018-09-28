@@ -11,13 +11,10 @@ int main(void)
 	int            nCPU = 4;
 
 	uint cpuUsage = analyzer.GetCPUUsage(nCPU);
-	printf("cpuUsage : %d\n", cpuUsage);
-
 	uint memUsage = analyzer.GetMemoryUsage();
-	printf("memUsage : %d\n", memUsage);
-
 	uint diskUsage = analyzer.GetDiskUsage();
-	printf("diskUsage : %d\n", diskUsage);
+	
+	fprintf(stdout,"%d,%d,%d",cpuUsage,memUsage,diskUsage);
 
 	return 0;
 }
