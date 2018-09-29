@@ -1,0 +1,15 @@
+/* ユーザ作成 */
+CREATE USER 'user1'@'10.0.1.%' IDENTIFIED BY 'password';
+
+CREATE DATABASE IF NOT EXISTS `Machine` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+GRANT  INSERT,SELECT,UPDATE ON `Machine`.* TO 'user1'@'10.0.1.%';
+
+CREATE TABLE `Machine`.`ReportData`(
+	ipaddr    INTEGER UNSIGNED NOT NULL PRIMARY KEY,
+	delay     INTEGER NOT NULL,
+	cpuUsage  INTEGER NOT NULL,
+	memUsage  INTEGER NOT NULL,
+	diskUsage INTEGER NOT NULL,
+	hostname  VARCHAR(30) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
