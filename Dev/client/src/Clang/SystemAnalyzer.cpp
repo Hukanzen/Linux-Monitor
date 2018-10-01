@@ -10,11 +10,11 @@
 
 using namespace std;
 
-SystemAnalyzer::SystemAnalyzer()
+SystemAnalyzer::SystemAnalyzer(int delay)
 {
 	preTick_ = GetPreTick_();
 	preTime_ = times(NULL);
-	sleep(1);
+	sleep(delay);
 }
 
 uint SystemAnalyzer::GetCPUUsage(int nCPU)

@@ -1,7 +1,17 @@
-all: SystemAnalyzer.out
+all: client.out
 
-SystemAnalyzer.out : main.cpp SystemAnalyzer.cpp SystemAnalyzer.hpp
-	g++ -o SystemAnalyzer.out main.cpp SystemAnalyzer.cpp
+main.o:main.cpp
+	g++ -c -o $@ $<
+
+SystemAnalyzer.o: SystemAnalyzer.cpp SystemAnalyzer.hpp
+	g++ -c -o $@ SystemAnalyzer.cpp
+	
+Curl.o: Curl.cpp Curl.hpp
+	g++ -c -o $@ Curl.cpp
+	
+client.out: main.o SystemAnalyzer.o Curl.o  -lcurl
+	g++ -o $@ $^
 	
 clean:
-	rm SystemAnalyzer.out
+	-rm *.o
+	-rm client.out
