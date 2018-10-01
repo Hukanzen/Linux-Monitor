@@ -36,7 +36,7 @@ my $db=mysqli_connection->new;
 
 $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
 	
-$db->db_do('INSERT INTO '.$DB_NAME.'.ReportData  VALUES ('.$ipaddr.','.$delay.','.$cpuUsage.','.$memUsage.','.$diskUsage.',"'.$hostname.'")');
+$db->db_do('INSERT INTO '.$DB_NAME.'.ReportData (ipaddr,delay,cpuUsage,memUsage,diskUsage,hostname) VALUES ('.$ipaddr.','.$delay.','.$cpuUsage.','.$memUsage.','.$diskUsage.',"'.$hostname.'")');
 	# $db->db_do('INSERT INTO '.$DB_NAME.'.ReportData  VALUES (2130706433,1,2,3,4,\'Test\')');
 
 
