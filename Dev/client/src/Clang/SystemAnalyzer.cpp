@@ -82,7 +82,7 @@ int SystemAnalyzer::GetPreTick_(void)
 	// 演算に使用されたTick値を取得
 	FILE *infile = fopen("/proc/stat", "r");
 	if (NULL == infile) {
-		cout << "[GetCPUUsage]<<Cannot open /proc/stat" << endl;
+		cout << "[GetCPUUsage]<<Cannot open /srv/proc/stat" << endl;
 		return 0;
 	}
 
