@@ -25,26 +25,30 @@ int main(void)
 	uint memUsage  = analyzer.GetMemoryUsage();
 	uint diskUsage = analyzer.GetDiskUsage();
 
+	double *loadave; // Load Average
+	loadave = analyzer.GetLoadAverage();
+
+	char hostname[N] = {"hige"};
+
 #ifdef DEBUG
 	fprintf(stdout, "%d,%d,%d", cpuUsage, memUsage, diskUsage);
 #endif
 
-	char hostname[N] = {"hige"};
-
 	char post[N];
-	sprintf(post, "ipaddr=%s&delay=%d&cpu=%u&mem=%u&disk=%u&hostname=%s", ipaddr,
-	        delay, cpuUsage, memUsage, diskUsage, hostname);
+	sprintf(post,
+	        "ipaddr=%s&delay=%d&cpu=%u&mem=%u&disk=%u&la1=%.2f&la5=%.2f&la15=%.2f&"
+	        "hostname=%s",
+	        ipaddr, delay, cpuUsage, memUsage, diskUsage, loadave[0], loadave[1],
+	        loadave[2], hostname);
 
 	fprintf(stdout, "%s\n", post);
-	
-	double *loadave;
-	loadave=analyzer.GetLoadAverage();
 
 #ifndef NOPOST
 	// myCurlLib      curlLib("http://localhost:40080/getdata.cgi");
 	myCurlLib curlLib("http://host.docker.internal:40080/getdata.cgi");
 	curlLib.PostData(post);
 	curlLib.Perform();
+	fprintf(stdout,"POSTED\n");
 #endif
 
 	// fprintf(stdout,"HELLO\n");

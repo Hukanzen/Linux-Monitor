@@ -24,7 +24,10 @@ my $delay     = $query->param('delay');     # データ取得分
 my $cpuUsage  = $query->param('cpu');       # 
 my $memUsage  = $query->param('mem');       # 
 my $diskUsage = $query->param('disk');      # 
-my $hostname  = $query->param('hostname'); #
+my $la1min    = $query->param('la1');       #
+my $la5min    = $query->param('la5');       #
+my $la15min   = $query->param('la15');      #
+my $hostname  = $query->param('hostname');  #
 
 
 my $DB_ADDR="mysql";
@@ -36,7 +39,7 @@ my $db=mysqli_connection->new;
 
 $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
 	
-$db->db_do('INSERT INTO '.$DB_NAME.'.ReportData (ipaddr,delay,cpuUsage,memUsage,diskUsage,hostname) VALUES ('.$ipaddr.','.$delay.','.$cpuUsage.','.$memUsage.','.$diskUsage.',"'.$hostname.'")');
+$db->db_do('INSERT INTO '.$DB_NAME.'.ReportData (ipaddr,la1min,la5min,la15min,delay,cpuUsage,memUsage,diskUsage,hostname) VALUES ('.$ipaddr.','.$la1min.','.$la5min.','.$la15min.','.$delay.','.$cpuUsage.','.$memUsage.','.$diskUsage.',"'.$hostname.'")');
 	# $db->db_do('INSERT INTO '.$DB_NAME.'.ReportData  VALUES (2130706433,1,2,3,4,\'Test\')');
 
 
