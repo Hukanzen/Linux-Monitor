@@ -10,12 +10,17 @@
 
 using namespace std;
 
+/* =================================================================
+ Public
+=================================================================*/
 SystemAnalyzer::SystemAnalyzer(int delay)
 {
 	preTick_ = GetPreTick_();
 	preTime_ = times(NULL);
 	sleep(delay);
 }
+
+SystemAnalyzer::~SystemAnalyzer(void) {}
 
 uint SystemAnalyzer::GetCPUUsage(int nCPU)
 {
@@ -77,6 +82,20 @@ uint SystemAnalyzer::GetDiskUsage(void)
 	return diskUsage;
 }
 
+double *SystemAnalyzer::GetLoadAverage(void)
+{
+	// double la[3];
+	double *la;
+	la=new double(3);
+	
+	getloadavg(la, 3);
+
+	return la;
+}
+
+/* =================================================================
+ Private
+=================================================================*/
 int SystemAnalyzer::GetPreTick_(void)
 {
 	// 演算に使用されたTick値を取得

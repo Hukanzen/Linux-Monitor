@@ -48,8 +48,7 @@ class SystemAnalyzer
 {
 	public:
 	SystemAnalyzer(int);
-
-	//~~~~~~functions~~~~~~~
+	~SystemAnalyzer(void);
 
 	/**
 	 * @brief CPUの使用率を返す関数
@@ -72,17 +71,18 @@ class SystemAnalyzer
 	 */
 	uint GetDiskUsage(void);
 
+	/**
+	 * @brief Load Averageを取得
+	 * @param 
+	 * @return Load Averageを代入したdouble型の配列のアドレスを返す
+	 */
+	double *GetLoadAverage(void);
+
 	private:
 	//	GetCPUUsage用
 	int     preTick_; // 前の/proc/statの値を保持
 	clock_t preTime_; // 前の時刻を保持
 
 	int GetPreTick_(void);
-
-	//~~~~~~Struct/Enum~~~~~~
-
-	//~~~~~~Members~~~~~
-
-	//~~~~~~functions~~~~~~~
 };
 #endif // SYSTEM_ANALYZER_H
