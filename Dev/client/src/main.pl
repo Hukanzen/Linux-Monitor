@@ -12,21 +12,27 @@ use Data::Dumper;
 
 sub main
 {
-	&initial;
-	
-	my @usage=split(/,/,`Clang/SystemAnalyzer.out`);
-	
-	print Dumper @usage;
+	&make;
+
+	&execute;
+	print Dumper "END";
 	
 	# &clean;
 	
 	return 0;
 }
 
-sub initial
+sub make
 {
 	chdir('Clang');
 	system('make');
+	chdir('../');
+}
+
+sub execute
+{
+	chdir('Clang');
+	system('./client.out');
 	chdir('../');
 }
 

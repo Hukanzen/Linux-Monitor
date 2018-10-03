@@ -28,14 +28,18 @@
  *
  * @author Atsushi Sakai
  */
-#ifndef SYSTEM_ANALYZER_H
-#define SYSTEM_ANALYZER_H
+#ifndef __SYSTEM_ANALYZER_H__
+#define __SYSTEM_ANALYZER_H__
 
-#include <iostream>
-#include <stdio.h>
-#include <sys/statvfs.h>
-#include <sys/sysinfo.h>
-#include <sys/times.h>
+// #include <iostream>
+// #include <stdio.h>
+// #include <sys/statvfs.h>
+// #include <sys/sysinfo.h>
+// #include <sys/times.h>
+
+#ifndef uint
+#define uint unsigned int
+#endif
 
 /**
  * @brief Linuxにおいてシステム情報を取得するためのクラス
@@ -43,30 +47,43 @@
 class SystemAnalyzer
 {
 	public:
-	SystemAnalyzer();
+	SystemAnalyzer(int);
+	~SystemAnalyzer(void);
 
-	//~~~~~~functions~~~~~~~
+	/**
+	 * @brief IPアドレスを取得する
+	 * @param device Network Device Name
+	 * @return IPアドレスを記録したchar型ポインタ
+	 */
+	char *GetIpAddr(const char *);
 
 	/**
 	 * @brief CPUの使用率を返す関数
 	 * @param nCPU CPUの数
 	 * @return システム全体のCPUの使用率[%]
 	 */
-	unsigned int GetCPUUsage(int);
+	uint GetCPUUsage(int);
 
 	/**
 	 * @brief 使用されているメモリの割合を取得する関数
 	 *
 	 * @return 使用されているメモリの割合[%] 0-100
 	 */
-	unsigned int GetMemoryUsage(void);
+	uint GetMemoryUsage(void);
 
 	/**
 	 * @brief 使用されているディスクの割合を取得する関数
 	 *
 	 * @return 使用されているディスクの割合[%] 0-100
 	 */
-	unsigned int GetDiskUsage(void);
+	uint GetDiskUsage(void);
+
+	/**
+	 * @brief Load Averageを取得
+	 * @param
+	 * @return Load Averageを代入したdouble型ポインタを返す
+	 */
+	double *GetLoadAverage(void);
 
 	private:
 	//	GetCPUUsage用
@@ -74,11 +91,5 @@ class SystemAnalyzer
 	clock_t preTime_; // 前の時刻を保持
 
 	int GetPreTick_(void);
-
-	//~~~~~~Struct/Enum~~~~~~
-
-	//~~~~~~Members~~~~~
-
-	//~~~~~~functions~~~~~~~
 };
 #endif // SYSTEM_ANALYZER_H

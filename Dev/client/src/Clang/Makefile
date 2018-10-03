@@ -1,7 +1,8 @@
-all: SystemAnalyzer.out
+all: client.out
 
-SystemAnalyzer.out : main.cpp SystemAnalyzer.cpp SystemAnalyzer.hpp
-	g++ -o SystemAnalyzer.out main.cpp SystemAnalyzer.cpp
+client.out: Main.cpp SystemAnalyzer.cpp Curl.cpp
+	g++ -o $@ $^  -lcurl
 	
 clean:
-	rm SystemAnalyzer.out
+	-rm *.o
+	-rm client.out
