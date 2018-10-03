@@ -17,4 +17,4 @@ RUN apt-get -y autoremove && \
 WORKDIR /src
 
 CMD ["perl","main.pl"]
-# CMD /bin/bash
+#CMD /bin/bash

@@ -19,14 +19,13 @@ int main(void)
 	int            nCPU  = 4;
 	SystemAnalyzer analyzer(delay);
 
-	char ipaddr[N] = {"2130706433"};
+	char *ipaddr = analyzer.GetIpAddr("eth0");
 
 	uint cpuUsage  = analyzer.GetCPUUsage(nCPU);
 	uint memUsage  = analyzer.GetMemoryUsage();
 	uint diskUsage = analyzer.GetDiskUsage();
 
-	double *loadave; // Load Average
-	loadave = analyzer.GetLoadAverage();
+	double *loadave = analyzer.GetLoadAverage();
 
 	char hostname[N] = {"hige"};
 
@@ -48,7 +47,7 @@ int main(void)
 	myCurlLib curlLib("http://host.docker.internal:40080/getdata.cgi");
 	curlLib.PostData(post);
 	curlLib.Perform();
-	fprintf(stdout,"POSTED\n");
+	fprintf(stdout, "POSTED\n");
 #endif
 
 	// fprintf(stdout,"HELLO\n");

@@ -51,6 +51,13 @@ class SystemAnalyzer
 	~SystemAnalyzer(void);
 
 	/**
+	 * @brief IPアドレスを取得する
+	 * @param device Network Device Name
+	 * @return IPアドレスを記録したchar型ポインタ
+	 */
+	char *GetIpAddr(const char *);
+
+	/**
 	 * @brief CPUの使用率を返す関数
 	 * @param nCPU CPUの数
 	 * @return システム全体のCPUの使用率[%]
@@ -73,8 +80,8 @@ class SystemAnalyzer
 
 	/**
 	 * @brief Load Averageを取得
-	 * @param 
-	 * @return Load Averageを代入したdouble型の配列のアドレスを返す
+	 * @param
+	 * @return Load Averageを代入したdouble型ポインタを返す
 	 */
 	double *GetLoadAverage(void);
 
