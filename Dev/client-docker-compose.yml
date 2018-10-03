@@ -17,4 +17,7 @@ services:
     hostname: "linux_client"
     volumes: 
       - './client/src:/src'
+      - '/proc/stat:/srv/proc/stat:ro'
+    pid: "host"
+    #tty: true
       

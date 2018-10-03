@@ -1,20 +1,47 @@
+#include <arpa/inet.h>
+#include <errno.h>
 #include <iostream>
+#include <linux/if.h>
+#include <netdb.h>
 #include <stdio.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
 #include <sys/statvfs.h>
 #include <sys/sysinfo.h>
 #include <sys/times.h>
-
+#include <sys/types.h>
 #include <unistd.h>
 
 #include "SystemAnalyzer.hpp"
 
 using namespace std;
 
-SystemAnalyzer::SystemAnalyzer()
+/* =================================================================
+ Public
+=================================================================*/
+SystemAnalyzer::SystemAnalyzer(int delay)
 {
 	preTick_ = GetPreTick_();
 	preTime_ = times(NULL);
-	sleep(1);
+	sleep(delay);
+}
+
+SystemAnalyzer::~SystemAnalyzer(void) {}
+
+char *SystemAnalyzer::GetIpAddr(const char *device)
+{
+	int s = socket(AF_INET, SOCK_STREAM, 0);
+
+	struct ifreq ifr;
+	ifr.ifr_addr.sa_family = AF_INET;
+	strcpy(ifr.ifr_name, device);
+	ioctl(s, SIOCGIFADDR, &ifr);
+	close(s);
+
+	struct sockaddr_in addr;
+	memcpy(&addr, &ifr.ifr_ifru.ifru_addr, sizeof(struct sockaddr_in));
+	return inet_ntoa(addr.sin_addr);
 }
 
 uint SystemAnalyzer::GetCPUUsage(int nCPU)
@@ -77,12 +104,26 @@ uint SystemAnalyzer::GetDiskUsage(void)
 	return diskUsage;
 }
 
+double *SystemAnalyzer::GetLoadAverage(void)
+{
+	// double la[3];
+	double *la;
+	la = new double(3);
+
+	getloadavg(la, 3);
+
+	return la;
+}
+
+/* =================================================================
+ Private
+=================================================================*/
 int SystemAnalyzer::GetPreTick_(void)
 {
 	// 演算に使用されたTick値を取得
 	FILE *infile = fopen("/proc/stat", "r");
 	if (NULL == infile) {
-		cout << "[GetCPUUsage]<<Cannot open /proc/stat" << endl;
+		cout << "[GetCPUUsage]<<Cannot open /srv/proc/stat" << endl;
 		return 0;
 	}
 
