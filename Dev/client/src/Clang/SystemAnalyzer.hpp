@@ -58,6 +58,13 @@ class SystemAnalyzer
 	char *GetIpAddr(const char *);
 
 	/**
+	 * @brief IPアドレスをuint型にする
+	 * @param 文字列のIPアドレス
+	 * @return uint型IPアドレス
+	 */
+	uint conv_IpAddr_aton(const char *);
+
+	/**
 	 * @brief CPUの使用率を返す関数
 	 * @param nCPU CPUの数
 	 * @return システム全体のCPUの使用率[%]

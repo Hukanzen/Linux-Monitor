@@ -44,6 +44,13 @@ char *SystemAnalyzer::GetIpAddr(const char *device)
 	return inet_ntoa(addr.sin_addr);
 }
 
+uint SystemAnalyzer::conv_IpAddr_aton(const char *straddr)
+{
+	struct in_addr inaddr;
+	inet_aton(straddr, &inaddr);
+	return inaddr.s_addr;
+}
+
 uint SystemAnalyzer::GetCPUUsage(int nCPU)
 {
 	unsigned int cpuUsage = 0;

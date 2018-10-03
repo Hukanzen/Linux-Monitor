@@ -73,7 +73,7 @@ sub db_fetch_assoc_hash{
 	# hash として，保存する
 	while(my $hash_ref=$sth->fetchrow_hashref){
 		my %line=%$hash_ref;
-		# push(\@db_data,\%line);
+		push(@db_data,%line);
 	}
 
 	#print Dumper @db_data;
@@ -94,7 +94,7 @@ sub db_fetch_assoc_array{
 	# array として，保存する
 	while(my $ary_ref=$sth->fetchrow_arrayref){
 		my @line=@$ary_ref;
-		# push(\@db_data,\@line);
+		push(@db_data,@line);
 	}
 	
 	#print Dumper @db_data;
