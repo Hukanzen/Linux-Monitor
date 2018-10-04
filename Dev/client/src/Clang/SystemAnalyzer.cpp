@@ -11,6 +11,7 @@
 #include <sys/sysinfo.h>
 #include <sys/times.h>
 #include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 
 #include "SystemAnalyzer.hpp"
@@ -42,6 +43,13 @@ char *SystemAnalyzer::GetIpAddr(const char *device)
 	struct sockaddr_in addr;
 	memcpy(&addr, &ifr.ifr_ifru.ifru_addr, sizeof(struct sockaddr_in));
 	return inet_ntoa(addr.sin_addr);
+}
+
+uint SystemAnalyzer::conv_IpAddr_aton(const char *straddr)
+{
+	struct in_addr inaddr;
+	inet_aton(straddr, &inaddr);
+	return inaddr.s_addr;
 }
 
 uint SystemAnalyzer::GetCPUUsage(int nCPU)
@@ -113,6 +121,20 @@ double *SystemAnalyzer::GetLoadAverage(void)
 	getloadavg(la, 3);
 
 	return la;
+}
+
+char *SystemAnalyzer::GetDateTimeNow(void)
+{
+
+	time_t     timer = time(NULL);
+	struct tm *tm    = localtime(&timer);
+
+	int   n = 20;
+	char *datetime;
+	datetime = new char(n);
+	strftime(datetime, n, "%Y-%m-%d %H:%M:%S", tm);
+
+	return datetime;
 }
 
 /* =================================================================

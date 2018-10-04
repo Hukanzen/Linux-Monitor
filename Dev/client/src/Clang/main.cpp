@@ -1,12 +1,17 @@
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 #include "Curl.hpp"
 #include "SystemAnalyzer.hpp"
 
-#define NOPOST
+// #define NOPOST
 
 #ifndef uint
 #define uint unsigned int
@@ -19,12 +24,14 @@ int main(void)
 	int            nCPU  = 4;
 	SystemAnalyzer analyzer(delay);
 
-	char *ipaddr = analyzer.GetIpAddr("eth0");
+	char *ipaddr_str = analyzer.GetIpAddr("eth0");
+	uint  ipaddr     = analyzer.conv_IpAddr_aton(ipaddr_str);
 
 	uint cpuUsage  = analyzer.GetCPUUsage(nCPU);
 	uint memUsage  = analyzer.GetMemoryUsage();
 	uint diskUsage = analyzer.GetDiskUsage();
 
+	char *  gettime = analyzer.GetDateTimeNow();
 	double *loadave = analyzer.GetLoadAverage();
 
 	char hostname[N] = {"hige"};
@@ -35,10 +42,10 @@ int main(void)
 
 	char post[N];
 	sprintf(post,
-	        "ipaddr=%s&delay=%d&cpu=%u&mem=%u&disk=%u&la1=%.2f&la5=%.2f&la15=%.2f&"
-	        "hostname=%s",
+	        "ipaddr=%d&delay=%d&cpu=%u&mem=%u&disk=%u&la1=%.2f&la5=%.2f&la15=%.2f&"
+	        "hostname=%s&gettime=%s",
 	        ipaddr, delay, cpuUsage, memUsage, diskUsage, loadave[0], loadave[1],
-	        loadave[2], hostname);
+	        loadave[2], hostname, gettime);
 
 	fprintf(stdout, "%s\n", post);
 

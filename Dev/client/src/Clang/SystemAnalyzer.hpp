@@ -52,6 +52,13 @@ class SystemAnalyzer
 	char *GetIpAddr(const char *);
 
 	/**
+	 * @brief IPアドレスをuint型にする
+	 * @param 文字列のIPアドレス
+	 * @return uint型IPアドレス
+	 */
+	uint conv_IpAddr_aton(const char *);
+
+	/**
 	 * @brief CPUの使用率を返す関数
 	 * @param nCPU CPUの数
 	 * @return システム全体のCPUの使用率[%]
@@ -78,6 +85,13 @@ class SystemAnalyzer
 	 * @return Load Averageを代入したdouble型ポインタを返す
 	 */
 	double *GetLoadAverage(void);
+
+	/**
+	 * @brief 現在時刻を取得
+	 * @param
+	 * @return "%Y-%m-%d %H:%M:%S"
+	 */
+	char *GetDateTimeNow(void);
 
 	private:
 	//	GetCPUUsage用

@@ -2,7 +2,8 @@
 
 print "Content-type: text/html\n\n";
 print '<html>';
-print "<body>&nbsp;<p><h1>GCI with MiniPerl</h1>";
-print "CGI with MiniPerl is ready ...</body></html>";
+print "<body>";
+print '<a href=./machinelist.cgi>machinelist.cgi</a>';
+print "</body></html>";
 
 
