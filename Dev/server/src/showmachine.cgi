@@ -15,11 +15,12 @@ use GD::Graph::bars;
 
 binmode STDOUT;
 
-# print "Content-type: text/html\n\n";
+print "Content-type: text/html\n\n";
+print "<!doctype html>";
 
 
 my $query = new CGI;
-print $query->header( -type => "image/jpeg",-charset => 'utf-8' );
+# print $query->header( -type => "image/jpeg",-charset => 'utf-8' );
 
 my $ipaddr    = $query->param('ipaddr');    # IPアドレス
 
@@ -32,29 +33,48 @@ my $db=mysqli_connection->new;
 
 $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
 
-my @ladata=$db->db_fetch_assoc_hash('SELECT gettime,la1min,la5min,la15min FROM '.$DB_NAME.'.ReportData WHERE ipaddr='.$ipaddr.';');
+# my @ladata=$db->db_fetch_assoc_hash('SELECT gettime,la1min,la5min,la15min FROM '.$DB_NAME.'.ReportData WHERE ipaddr='.$ipaddr.';');
 
 my @select_data=$db->db_fetch_assoc_hash('SELECT * FROM '.$DB_NAME.'.ReportData WHERE ipaddr='.$ipaddr.';');
 
 $db->disconnect;
 
-my (@gettime,@la1min,@la5min,@la15min);
-foreach my $data (@ladata){
-	push(@gettime,$data->{'gettime'});
-	push(@la1min ,$data->{'la1min'});
-	push(@la5min ,$data->{'la5min'});
-	push(@la15min,$data->{'la15min'});
-}
+# my (@gettime,@la1min,@la5min,@la15min);
+# foreach my $data (@ladata){
+# 	push(@gettime,$data->{'gettime'});
+# 	push(@la1min ,$data->{'la1min'});
+# 	push(@la5min ,$data->{'la5min'});
+# 	push(@la15min,$data->{'la15min'});
+# }
 
-my @graphdata=(\@gettime,\@la1min);
+# my @graphdata=(\@gettime,\@la1min);
 
-my $graph = GD::Graph::bars->new( 800, 600 );
-$graph->set(title => "Load Average 1min");
+# my $graph = GD::Graph::bars->new( 800, 600 );
+# $graph->set(title => "Load Average 1min");
 
-my $image = $graph->plot(\@graphdata)->jpeg();
-print STDOUT $image;
+# my $image = $graph->plot(\@graphdata)->jpeg();
+# print STDOUT $image;
 
-print "<table>\n";
+print '<html><body>';
+
+print '<iframe src=./lanmin_graph.cgi?ipaddr='.$ipaddr.'&min=1 width=360 height=260> iframe </iframe>';
+print '<iframe src=./lanmin_graph.cgi?ipaddr='.$ipaddr.'&min=5 width=360 height=260> iframe </iframe>';
+print '<iframe src=./lanmin_graph.cgi?ipaddr='.$ipaddr.'&min=15 width=360 height=260> iframe </iframe>';
+
+print "<table border=1>\n";
+print "<tr>";
+print "<th>ipaddr</th>
+	<th>hostname</th>
+	<th>la1min</th>
+	<th>la5min</th>
+	<th>la15min</th>
+	<th>delay</th>
+	<th>cpuUsage</th>
+	<th>memUsage</th>
+	<th>diskUsage</th>
+	<th>gettime</th>";
+print "</tr>\n";
+
 foreach my $data (@select_data){
 	print "<tr>";
 	print "<td>".%$data{'ipaddr'}."</td>";
@@ -71,4 +91,6 @@ foreach my $data (@select_data){
 }
 
 print "</table>\n";
+
+print '</body></html>'
 
