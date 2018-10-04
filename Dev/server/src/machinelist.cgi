@@ -24,8 +24,15 @@ my $db=mysqli_connection->new;
 $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
 	
 # $db->db_do('INSERT INTO '.$DB_NAME.'.ReportData (ipaddr,la1min,la5min,la15min,delay,cpuUsage,memUsage,diskUsage,hostname) VALUES ('.$ipaddr.','.$la1min.','.$la5min.','.$la15min.','.$delay.','.$cpuUsage.','.$memUsage.','.$diskUsage.',"'.$hostname.'")');
-my @select_data=$db->db_fetch_assoc_array('SELECT ipaddr,hostname FROM '.$DB_NAME.'.ReportData');
+my @select_data=$db->db_fetch_assoc_hash('SELECT ipaddr,hostname FROM '.$DB_NAME.'.ReportData');
+$db->disconnect;
 
+print "<table>\n";
 foreach my $data (@select_data){
-	print $data."<br>";
+	print "<tr>";
+	print "<td> <a href=showmachine.cgi?ipaddr=".%$data{'ipaddr'}.">".%$data{'ipaddr'}."</a></td>";
+	print "<td>".%$data{'hostname'}."</td>";
+	print "</tr>\n"
 }
+
+print "</table>\n";

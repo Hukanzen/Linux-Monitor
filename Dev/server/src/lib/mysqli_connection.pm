@@ -53,7 +53,7 @@ sub db_query{
 	my ($sql)=@_;
 
 	my $dbh=$self->{"dbh"};
-	print Dumper($self);
+	# print Dumper($self);
 	
 	# クエリー発行
 	return $dbh->prepare($sql);
@@ -73,7 +73,7 @@ sub db_fetch_assoc_hash{
 	# hash として，保存する
 	while(my $hash_ref=$sth->fetchrow_hashref){
 		my %line=%$hash_ref;
-		push(@db_data,%line);
+		push(@db_data,\%line);
 	}
 
 	#print Dumper @db_data;
