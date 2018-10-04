@@ -92,6 +92,13 @@ class SystemAnalyzer
 	 */
 	double *GetLoadAverage(void);
 
+	/**
+	 * @brief 現在時刻を取得
+	 * @param
+	 * @return "%Y-%m-%d %H:%M:%S"
+	 */
+	char *GetDateTimeNow(void);
+
 	private:
 	//	GetCPUUsage用
 	int     preTick_; // 前の/proc/statの値を保持

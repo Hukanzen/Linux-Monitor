@@ -31,6 +31,7 @@ int main(void)
 	uint memUsage  = analyzer.GetMemoryUsage();
 	uint diskUsage = analyzer.GetDiskUsage();
 
+	char *  gettime = analyzer.GetDateTimeNow();
 	double *loadave = analyzer.GetLoadAverage();
 
 	char hostname[N] = {"hige"};
@@ -42,9 +43,9 @@ int main(void)
 	char post[N];
 	sprintf(post,
 	        "ipaddr=%d&delay=%d&cpu=%u&mem=%u&disk=%u&la1=%.2f&la5=%.2f&la15=%.2f&"
-	        "hostname=%s",
+	        "hostname=%s&gettime=%s",
 	        ipaddr, delay, cpuUsage, memUsage, diskUsage, loadave[0], loadave[1],
-	        loadave[2], hostname);
+	        loadave[2], hostname, gettime);
 
 	fprintf(stdout, "%s\n", post);
 

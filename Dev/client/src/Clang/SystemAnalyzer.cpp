@@ -11,6 +11,7 @@
 #include <sys/sysinfo.h>
 #include <sys/times.h>
 #include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 
 #include "SystemAnalyzer.hpp"
@@ -120,6 +121,20 @@ double *SystemAnalyzer::GetLoadAverage(void)
 	getloadavg(la, 3);
 
 	return la;
+}
+
+char *SystemAnalyzer::GetDateTimeNow(void)
+{
+
+	time_t     timer = time(NULL);
+	struct tm *tm    = localtime(&timer);
+
+	int   n = 20;
+	char *datetime;
+	datetime = new char(n);
+	strftime(datetime, n, "%Y-%m-%d %H:%M:%S", tm);
+
+	return datetime;
 }
 
 /* =================================================================

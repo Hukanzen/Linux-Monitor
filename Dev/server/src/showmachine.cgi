@@ -41,6 +41,7 @@ foreach my $data (@select_data){
 	print "<td>".%$data{'cpuUsage'}."</td>";
 	print "<td>".%$data{'memUsage'}."</td>";
 	print "<td>".%$data{'diskUsage'}."</td>";
+	print "<td>".%$data{'gettime'}."</td>";
 	print "</tr>\n"
 }
 
