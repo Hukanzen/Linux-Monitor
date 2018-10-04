@@ -2,7 +2,7 @@
  *
  * https://myenigma.hatenablog.com/entry/2015/04/27/185822
  *
- * @file SystemAnalyzer.h
+ * @file SystemAnalyzer.hpp
  *
  * @brief Linuxにおいてシステム情報を取得するためのクラスライブラリ
  *
@@ -30,12 +30,6 @@
  */
 #ifndef __SYSTEM_ANALYZER_H__
 #define __SYSTEM_ANALYZER_H__
-
-// #include <iostream>
-// #include <stdio.h>
-// #include <sys/statvfs.h>
-// #include <sys/sysinfo.h>
-// #include <sys/times.h>
 
 #ifndef uint
 #define uint unsigned int
