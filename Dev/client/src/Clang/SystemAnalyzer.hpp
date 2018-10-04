@@ -59,6 +59,13 @@ class SystemAnalyzer
 	uint conv_IpAddr_aton(const char *);
 
 	/**
+	 * @brif hostnameを取得する
+	 * @param
+	 * @return hostnameが入ったchar型ポインタ
+	 */
+	char *GetHostName(void);
+
+	/**
 	 * @brief CPUの使用率を返す関数
 	 * @param nCPU CPUの数
 	 * @return システム全体のCPUの使用率[%]

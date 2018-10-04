@@ -34,7 +34,7 @@ int main(void)
 	char *  gettime = analyzer.GetDateTimeNow();
 	double *loadave = analyzer.GetLoadAverage();
 
-	char hostname[N] = {"hige"};
+	char *hostname = analyzer.GetHostName();
 
 #ifdef DEBUG
 	fprintf(stdout, "%d,%d,%d", cpuUsage, memUsage, diskUsage);
