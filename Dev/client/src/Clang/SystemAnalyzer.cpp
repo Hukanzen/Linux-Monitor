@@ -52,6 +52,17 @@ uint SystemAnalyzer::conv_IpAddr_aton(const char *straddr)
 	return inaddr.s_addr;
 }
 
+char *SystemAnalyzer::GetHostName(void)
+{
+	int   n = 128;
+	char *hn;
+	hn = new char(n);
+	
+	gethostname(hn, n);
+	
+	return hn;
+}
+
 uint SystemAnalyzer::GetCPUUsage(int nCPU)
 {
 	unsigned int cpuUsage = 0;
