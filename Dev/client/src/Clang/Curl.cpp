@@ -7,18 +7,13 @@
 
 #define DEBUG
 
+/* =================================================================
+ Public
+=================================================================*/
+
 myCurlLib::myCurlLib(const char *url) { Curl_Init(url); }
 
 myCurlLib::~myCurlLib() { Curl_DeInit(); }
-
-void myCurlLib::Curl_Init(const char *url)
-{
-	curl = curl_easy_init();
-	curl_easy_setopt(curl, CURLOPT_URL, url);
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
-}
-
-void myCurlLib::Curl_DeInit(void) { curl_easy_cleanup(curl); }
 
 void myCurlLib::PostData(const char *post_data)
 {
@@ -35,3 +30,15 @@ int myCurlLib::Perform(void)
 #endif
 	return res;
 }
+
+/* =================================================================
+ Private
+=================================================================*/
+void myCurlLib::Curl_Init(const char *url)
+{
+	curl = curl_easy_init();
+	curl_easy_setopt(curl, CURLOPT_URL, url);
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
+}
+
+void myCurlLib::Curl_DeInit(void) { curl_easy_cleanup(curl); }
