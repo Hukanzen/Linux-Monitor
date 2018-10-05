@@ -20,4 +20,5 @@ services:
       - '/proc/stat:/srv/proc/stat:ro'
     pid: "host"
     #tty: true
+    network_mode: host
       

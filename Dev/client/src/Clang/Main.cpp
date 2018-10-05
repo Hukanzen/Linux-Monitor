@@ -50,8 +50,8 @@ int main(void)
 	fprintf(stdout, "%s\n", post);
 
 #ifndef NOPOST
-	// myCurlLib      curlLib("http://localhost:40080/getdata.cgi");
-	myCurlLib curlLib("http://host.docker.internal:40080/getdata.cgi");
+	myCurlLib curlLib("http://localhost:40080/getdata.cgi");
+	//myCurlLib curlLib("http://host.docker.internal:40080/getdata.cgi");
 	curlLib.PostData(post);
 	curlLib.Perform();
 	fprintf(stdout, "POSTED\n");
