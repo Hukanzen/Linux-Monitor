@@ -23,7 +23,7 @@ my $db=mysqli_connection->new;
 
 $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
 	
-my @select_data=$db->db_fetch_assoc_hash('SELECT DISTINCT ipaddr,hostname FROM '.$DB_NAME.'.ReportData');
+my @select_data=$db->db_fetch_assoc_hash('SELECT DISTINCT INET_NTOA(ipaddr) AS ipaddr,hostname FROM '.$DB_NAME.'.ReportData');
 $db->disconnect;
 
 print "<table>\n";
