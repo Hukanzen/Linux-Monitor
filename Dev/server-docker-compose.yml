@@ -1,26 +1,42 @@
 version: '3'
 services:
-  server:
-    # images: php:7-apache
+  web:
     build: 
-      context: ./server
-    hostname: "linux_server"
+      context: './server'
+      dockerfile: 'web-Dockerfile'
+    hostname: "web_server"
     networks:
       backend:
         ipv4_address: 10.0.1.2
-    volumes: 
-      - './server/src:/usr/local/apache2/htdocs/'
+    volumes:
+      - './server/web:/usr/local/apache2/htdocs/'
     ports:
       - '40080:80'
     depends_on: 
       - "mysql"
   
+  api:
+    build: 
+      context: './server'
+      dockerfile: 'api-Dockerfile'
+    hostname: "api_server"
+    networks:
+      backend:
+        ipv4_address: 10.0.1.3
+    volumes:
+      - './server/api:/usr/local/apache2/htdocs/'
+    ports:
+      - '40081:80'
+    depends_on: 
+      - "mysql"
+    # tty: true
+      
   mysql:
     image: mysql:5.7
     hostname: "linux_mysql"
     networks:
       backend:
-        ipv4_address: 10.0.1.3
+        ipv4_address: 10.0.1.10
     volumes:
        - "./srv/mysql/initdb:/docker-entrypoint-initdb.d"
       #  - "./srv/mysql/db_data/:/var/lib/mysql"
@@ -33,11 +49,11 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports: 
-      - "40081:80"
+      - "40082:80"
     hostname: "linux_phpmyadmin"
     networks:
       backend:
-        ipv4_address: 10.0.1.4
+        ipv4_address: 10.0.1.11
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mysql

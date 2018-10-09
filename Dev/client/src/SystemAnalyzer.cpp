@@ -154,7 +154,7 @@ char *SystemAnalyzer::GetDateTimeNow(void)
 int SystemAnalyzer::GetPreTick_(void)
 {
 	// 演算に使用されたTick値を取得
-	FILE *infile = fopen("/proc/stat", "r");
+	FILE *infile = fopen("/srv/proc/stat", "r");
 	if (NULL == infile) {
 		cout << "[GetCPUUsage]<<Cannot open /srv/proc/stat" << endl;
 		return 0;
