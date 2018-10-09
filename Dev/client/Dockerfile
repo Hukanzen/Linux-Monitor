@@ -4,15 +4,13 @@ FROM debian:stretch
 
 RUN apt-get -y update && \
 	apt-get -y upgrade && \
-	apt-get -y install libcurl4-gnutls-dev make gcc g++ perl && \
+	apt-get -y install libcurl4-gnutls-dev make gcc g++ && \
 	apt-get -y autoremove && \
 	apt-get -y clean
 
 
 WORKDIR /src
-
-COPY ["./src/Clang/","."]
-
+COPY ["./src/","."]
 RUN make
 
 
