@@ -36,6 +36,7 @@ $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
 
 my @select_data=$db->db_fetch_assoc_hash('SELECT INET_NTOA(ipaddr) AS ipaddr,hostname,la1min,la5min,la15min,delay,cpuUsage,memUsage,diskUsage,gettime FROM '.$DB_NAME.'.ReportData WHERE ipaddr='.$ipaddr.';');
 
+
 $db->disconnect;
 
 print '<html><body>';
