@@ -6,7 +6,7 @@ use warnings;
 use Data::Dumper;
 use CGI;
 
-use lib qw(./lib);   # ./lib配下を読み込む
+use lib qw(./../lib);   # ./../lib配下を読み込む
 use mysqli_connection;
 
 use GD::Graph::points;
@@ -32,7 +32,6 @@ $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
 
 my @ladata=$db->db_fetch_assoc_hash('SELECT gettime,la'.$min.'min FROM '.$DB_NAME.'.ReportData WHERE ipaddr='.$ipaddr.';');
 
-my @select_data=$db->db_fetch_assoc_hash('SELECT * FROM '.$DB_NAME.'.ReportData WHERE ipaddr='.$ipaddr.';');
 
 $db->disconnect;
 
@@ -40,8 +39,6 @@ my (@gettime,@lanmin);
 foreach my $data (@ladata){
 	push(@gettime,$data->{'gettime'});
 	push(@lanmin ,$data->{'la'.$min.'min'});
-	# push(@la5min ,$data->{'la5min'});
-	# push(@la15min,$data->{'la15min'});
 }
 
 my @graphdata=(\@gettime,\@lanmin);
