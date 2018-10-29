@@ -49,7 +49,7 @@ class SystemAnalyzer
 	 * @param device Network Device Name
 	 * @return IPアドレスを記録したchar型ポインタ
 	 */
-	char *GetIpAddr(const char *);
+	// char *GetIpAddr(const char *);
 
 	/**
 	 * @brief IPアドレスをuint型にする

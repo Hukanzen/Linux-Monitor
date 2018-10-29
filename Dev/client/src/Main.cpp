@@ -10,6 +10,7 @@
 
 #include "Curl.hpp"
 #include "SystemAnalyzer.hpp"
+#include "FileManagement.hpp"
 
 // #define NOPOST
 
@@ -24,8 +25,10 @@ int main(void)
 	int            nCPU  = 4;
 	SystemAnalyzer analyzer(delay);
 
-	char *ipaddr_str = analyzer.GetIpAddr("eth0");
-	uint  ipaddr     = analyzer.conv_IpAddr_aton(ipaddr_str);
+	// char *ipaddr_str = analyzer.GetIpAddr("");
+	char *ipaddr_str;
+	uint ipaddr;
+	// uint  ipaddr     = analyzer.conv_IpAddr_aton(_IPADDR_);
 
 	uint cpuUsage  = analyzer.GetCPUUsage(nCPU);
 	uint memUsage  = analyzer.GetMemoryUsage();
@@ -58,6 +61,10 @@ int main(void)
 #endif
 
 	// fprintf(stdout,"HELLO\n");
+	delete[] gettime;
+	delete[] loadave;
+	delete[] hostname;
+	
 
 	return 0;
 }

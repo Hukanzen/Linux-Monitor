@@ -30,20 +30,20 @@ SystemAnalyzer::SystemAnalyzer(int delay)
 
 SystemAnalyzer::~SystemAnalyzer(void) {}
 
-char *SystemAnalyzer::GetIpAddr(const char *device)
-{
-	int s = socket(AF_INET, SOCK_STREAM, 0);
+// char *SystemAnalyzer::GetIpAddr(const char *device)
+// {
+// 	int s = socket(AF_INET, SOCK_STREAM, 0);
 
-	struct ifreq ifr;
-	ifr.ifr_addr.sa_family = AF_INET;
-	strcpy(ifr.ifr_name, device);
-	ioctl(s, SIOCGIFADDR, &ifr);
-	close(s);
+// 	struct ifreq ifr;
+// 	ifr.ifr_addr.sa_family = AF_INET;
+// 	strcpy(ifr.ifr_name, device);
+// 	ioctl(s, SIOCGIFADDR, &ifr);
+// 	close(s);
 
-	struct sockaddr_in addr;
-	memcpy(&addr, &ifr.ifr_ifru.ifru_addr, sizeof(struct sockaddr_in));
-	return inet_ntoa(addr.sin_addr);
-}
+// 	struct sockaddr_in addr;
+// 	memcpy(&addr, &ifr.ifr_ifru.ifru_addr, sizeof(struct sockaddr_in));
+// 	return inet_ntoa(addr.sin_addr);
+// }
 
 uint SystemAnalyzer::conv_IpAddr_aton(const char *straddr)
 {
