@@ -18,6 +18,7 @@ services:
     volumes: 
       #- './client/src:/src'
       - '/proc/stat:/srv/proc/stat:ro'
+      - './client/config.conf:/srv/config.conf'
     pid: "host"
     #tty: true
     network_mode: host
