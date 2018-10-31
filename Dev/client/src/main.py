@@ -3,7 +3,7 @@
 import SystemAnalyzer
 
 def main():
-	SysAnaly=SystemAnalyzer('/srv/')
+	SysAnaly=SystemAnalyzer.SystemAnalyzer('/srv/')
 	print(SysAnaly.GetIpAddr_str())
 	
 	
