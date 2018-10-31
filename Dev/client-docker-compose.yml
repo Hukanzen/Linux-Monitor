@@ -17,10 +17,9 @@ services:
     hostname: "linux_client"
     volumes: 
       #- './client/src:/src'
-      - '/proc/stat:/srv/proc/stat:ro'
+      - '/proc:/srv/proc:ro'
       - './client/config.conf:/srv/config.conf'
     pid: "host"
-    #tty: true
     network_mode: host
 
       

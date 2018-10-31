@@ -3,8 +3,9 @@
 import SystemAnalyzer
 
 def main():
-	SysAnaly=SystemAnalyzer.SystemAnalyzer('/srv/')
+	SysAnaly=SystemAnalyzer.SystemAnalyzer('/srv')
 	print(SysAnaly.GetIpAddr_str())
+	print(SysAnaly.ReadCPUInfo())
 	
 	
 if __name__ == '__main__':
