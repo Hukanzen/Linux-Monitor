@@ -9,7 +9,7 @@ def main():
 	SysAnaly.ReadInfo('mem')
 	print(SysAnaly.GetterInfo('cpu'))
 	print(SysAnaly.GetterInfo('mem'))
-	
+	print(SysAnaly.ReadLoadAvg())	
 	
 if __name__ == '__main__':
 	main()

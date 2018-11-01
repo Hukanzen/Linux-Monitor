@@ -52,3 +52,15 @@ class SystemAnalyzer:
 		elif Itype == 'mem':
 			print(self.__meminfo['MemTotal'])
 			print(self.__meminfo)
+	
+
+	#####
+	# /proc/loadavgを読みとる．
+	#####
+	def ReadLoadAvg(self):
+		with open(self.__proc_DIR+'/loadavg','r') as f:
+			oneline=f.read()
+		oneline_list=oneline.split(' ')
+		
+		print(oneline_list)
+
