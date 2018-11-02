@@ -15,6 +15,9 @@ class SystemAnalyzer:
 	# __process_num=0 # 動作プロセス数
 	# __process_sum=0 # 合計プロセス数
 
+	__cpuUsage=0.0 # CPU使用率
+	__memUsage=0.0 # メモリ使用率 =Total-Available
+
 	def __init__(self,location):
 		self.__location_DIR=location # /procのをマウントしている場所
 		self.__proc_DIR=location+'/proc' # /proc
@@ -94,8 +97,11 @@ class SystemAnalyzer:
 	def GetterDisk(self):
 		return 1
 
+	#####
+	# ホスト名を取得
+	#####
 	def GetterHostname(self):
-		with open(self.__etc_DIR+'/hostname','r')as f:
+		with open(self.__etc_DIR+'/hostname','r')as f: # /procだと書き換わる?
 			oneline=f.read()
 			oneline=re.sub('\n$','',oneline)
 
