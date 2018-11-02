@@ -11,7 +11,7 @@ def main():
 	print(SysAnaly.GetIpAddr_uint())
 	SysAnaly.ReadInfo('cpu')
 	SysAnaly.ReadInfo('mem')
-	print(SysAnaly.GetterInfo('cpu','processor'))
+	print(SysAnaly.GetterInfo('cpu','model name'))
 	print(SysAnaly.GetterInfo('mem','MemTotal'))
 	SysAnaly.ReadLoadAvg()
 	print(SysAnaly.GetterLoadAvg(1))
@@ -19,6 +19,7 @@ def main():
 	print(SysAnaly.GetterLoadAvg(15))
 	now = datetime.now().strftime("%Y/%m/%d-%H:%M:%S")
 	print(now)
+	print(SysAnaly.GetterHostname())
 	
 if __name__ == '__main__':
 	main()

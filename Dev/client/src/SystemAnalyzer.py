@@ -17,7 +17,8 @@ class SystemAnalyzer:
 
 	def __init__(self,location):
 		self.__location_DIR=location # /procのをマウントしている場所
-		self.__proc_DIR=location+'/proc' # /procファイル
+		self.__proc_DIR=location+'/proc' # /proc
+		self.__etc_DIR=location+'/etc'   # /etc
 		
 		self.__config = configparser.ConfigParser() # Configをパースするインスタンス
 		self.__config.read(self.__location_DIR+self.__config_FILE_NAME) # 読み込む
@@ -94,5 +95,10 @@ class SystemAnalyzer:
 		return 1
 
 	def GetterHostname(self):
-		return 1
+		with open(self.__etc_DIR+'/hostname','r')as f:
+			oneline=f.read()
+			oneline=re.sub('\n$','',oneline)
+
+		return oneline
+		# return 1
 

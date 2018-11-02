@@ -19,7 +19,10 @@ services:
       #- './client/src:/src'
       - '/proc:/srv/proc:ro'
       - './client/config.conf:/srv/config.conf'
+      - '/etc:/srv/etc:ro'
     pid: "host"
     network_mode: host
+    privileged: true
+    environment: 
+      - TZ=Asia/Tokyo
 
-      
