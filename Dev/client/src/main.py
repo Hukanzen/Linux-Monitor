@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 from datetime import datetime 
 import SystemAnalyzer
@@ -7,6 +8,7 @@ import SystemAnalyzer
 def main():
 	SysAnaly=SystemAnalyzer.SystemAnalyzer('/srv')
 	print(SysAnaly.GetIpAddr_str())
+	print(SysAnaly.GetIpAddr_uint())
 	SysAnaly.ReadInfo('cpu')
 	SysAnaly.ReadInfo('mem')
 	print(SysAnaly.GetterInfo('cpu','processor'))

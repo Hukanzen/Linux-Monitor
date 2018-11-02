@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 
 import configparser
 import re
+import socket
+import ipaddress
 
 class SystemAnalyzer:
 	__config_FILE_NAME='/config.conf' # Configファイル
@@ -20,6 +24,9 @@ class SystemAnalyzer:
 		
 	def GetIpAddr_str(self):
 		return self.__config.get('HostInfo','ipaddr_str') 
+	
+	def GetIpAddr_uint(self):
+		return int(ipaddress.ip_address(self.GetIpAddr_str()))
 	
 	#####
 	# /proc/+Itype+infoを読み取る．ただし，1つ分のコアのみ
