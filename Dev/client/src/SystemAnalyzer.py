@@ -7,9 +7,9 @@ class SystemAnalyzer:
 	__config_FILE_NAME='/config.conf' # Configファイル
 	__cpuinfo={} # /proc/cpuinfo の情報
 	__meminfo={} # /proc/cpuinfo の情報
-	__loadave=[0.0,0.0,0.0]    # load average
-	__process_num=0
-	__process_sum=0
+	__loadave=[0.0,0.0,0.0]    # load average 1min,5min,15min
+	# __process_num=0 # 動作プロセス数
+	# __process_sum=0 # 合計プロセス数
 
 	def __init__(self,location):
 		self.__location_DIR=location # /procのをマウントしている場所
@@ -23,6 +23,7 @@ class SystemAnalyzer:
 	
 	#####
 	# /proc/+Itype+infoを読み取る．ただし，1つ分のコアのみ
+	# @ARGS 'cpu' or 'mem'
 	#####
 	def ReadInfo(self,Itype):
 		with open(self.__proc_DIR+'/'+Itype+'info','r') as f:
@@ -36,6 +37,10 @@ class SystemAnalyzer:
 					break # for文を終了する
 				
 				key=re.sub('\t$','',key)
+				
+				if Itype == 'mem':
+					val=re.sub(' kB$','',val)
+				
 				val=re.sub('^ +','',val)
 				val=re.sub('\n$','',val)
 				
@@ -64,8 +69,8 @@ class SystemAnalyzer:
 		oneline_list=oneline.split(' ')
 		for i in range(3):
 			self.__loadave[i]=float(oneline_list[i])
-		self.__process_num=oneline_list[3]
-		self.__process_sum=oneline_list[4]
+		# self.__process_num=oneline_list[3]
+		# self.__process_sum=oneline_list[4]
 		
 	#####
 	# LoadAverageを読み取る
@@ -78,7 +83,9 @@ class SystemAnalyzer:
 		return self.__loadave[0]	
 
 
-	def GetterDisk:
+	def GetterDisk(self):
+		return 1
 
-	def GetterHostname:
+	def GetterHostname(self):
+		return 1
 
