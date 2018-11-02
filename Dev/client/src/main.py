@@ -3,12 +3,15 @@
 
 from datetime import datetime 
 import SystemAnalyzer
+import ReadMountConfig
 
 
 def main():
-	SysAnaly=SystemAnalyzer.SystemAnalyzer('/srv')
-	print(SysAnaly.GetIpAddr_str())
-	print(SysAnaly.GetIpAddr_uint())
+	RMC=ReadMountConfig.ReadMountConfig('/srv')
+	print(RMC.GetIpAddr_str())
+	print(RMC.GetIpAddr_uint())
+	
+	SysAnaly=SystemAnalyzer.SystemAnalyzer('/rootfs')
 	SysAnaly.ReadInfo('cpu')
 	SysAnaly.ReadInfo('mem')
 	print(SysAnaly.GetterInfo('cpu','model name'))

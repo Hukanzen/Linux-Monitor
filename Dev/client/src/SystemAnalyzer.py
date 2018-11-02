@@ -2,13 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-import configparser
 import re
 import socket
-import ipaddress
 
 class SystemAnalyzer:
-	__config_FILE_NAME='/config.conf' # Configファイル
 	__cpuinfo={} # /proc/cpuinfo の情報
 	__meminfo={} # /proc/cpuinfo の情報
 	__loadave=[0.0,0.0,0.0]    # load average 1min,5min,15min
@@ -20,18 +17,10 @@ class SystemAnalyzer:
 
 	def __init__(self,location):
 		self.__location_DIR=location # /procのをマウントしている場所
+		
 		self.__proc_DIR=location+'/proc' # /proc
 		self.__etc_DIR=location+'/etc'   # /etc
-		
-		self.__config = configparser.ConfigParser() # Configをパースするインスタンス
-		self.__config.read(self.__location_DIR+self.__config_FILE_NAME) # 読み込む
-		
-	def GetIpAddr_str(self):
-		return self.__config.get('HostInfo','ipaddr_str') 
-	
-	def GetIpAddr_uint(self):
-		return int(ipaddress.ip_address(self.GetIpAddr_str()))
-	
+
 	#####
 	# /proc/+Itype+infoを読み取る．ただし，1つ分のコアのみ
 	# @ARGS 'cpu' or 'mem'

@@ -17,9 +17,10 @@ services:
     hostname: "linux_client"
     volumes: 
       #- './client/src:/src'
-      - '/proc:/srv/proc:ro'
+      # - '/proc:/srv/proc:ro'
       - './client/config.conf:/srv/config.conf'
-      - '/etc:/srv/etc:ro'
+      # - '/etc:/srv/etc:ro'
+      - '/:/rootfs:ro'
     pid: "host"
     network_mode: host
     privileged: true
