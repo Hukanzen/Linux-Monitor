@@ -2,7 +2,7 @@ FROM alpine
 
 RUN apk update && apk upgrade && apk add curl tar make gcc build-base wget gnupg
 
-RUN mkdir -p /usr/src/perl
+RUN mkdir -p /usr/src/perl /app
 WORKDIR /usr/src/perl
 
 RUN curl -SLO https://www.cpan.org/src/5.0/perl-5.30.0.tar.gz && \
@@ -23,11 +23,16 @@ RUN curl -SLO https://www.cpan.org/src/5.0/perl-5.30.0.tar.gz && \
 	make -j$(nproc) && \
 	true TEST_JOBS=$(nproc) make test_harness && \
 	make install
-	
+
 RUN curl -LO http://xrl.us/cpanm && \
 	chmod +x cpanm && \
 	./cpanm App::cpanminus && \
 	rm -fr ./cpanm /root/.cpanm /usr/src/perl
 	
 RUN cpanm Net::SNMP && cpanm Net::SNMP
-	
+
+WORKDIR /app
+
+ADD ./src /app
+
+CMD perl main.pl
