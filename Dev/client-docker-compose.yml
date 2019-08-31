@@ -1,27 +1,9 @@
 version: '3'
 services:
-  # test:
-  #   build: 
-  #     context: ./test
-  #   hostname: "linux_test"
-  #   networks:
-  #     backend:
-  #       ipv4_address: 10.0.1.16
-  #   volumes: 
-  #     - "./test/src:/src"
-  #   tty: true
-  
   client:
     build:
       context: ./client
     hostname: "linux_client"
-    volumes: 
-      #- './client/src:/src'
-      # - '/proc:/srv/proc:ro'
-      - './client/config.conf:/srv/config.conf'
-      # - '/etc:/srv/etc:ro'
-      - '/:/rootfs:ro'
-    pid: "host"
     network_mode: host
     privileged: true
     environment: 
