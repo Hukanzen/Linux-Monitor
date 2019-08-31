@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run --rm client
+docker run --rm --net=host client
