@@ -5,16 +5,40 @@ CREATE DATABASE IF NOT EXISTS `Machine` DEFAULT CHARACTER SET utf8 COLLATE utf8_
 
 GRANT  INSERT,SELECT,UPDATE ON `Machine`.* TO 'user1'@'10.0.1.%';
 
-CREATE TABLE `Machine`.`ReportData`(
-	count   INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	ipaddr    INTEGER UNSIGNED NOT NULL,
-	la1min    FLOAT            NOT NULL,
-	la5min    FLOAT            NOT NULL,
-	la15min   FLOAT            NOT NULL,
-	delay     INTEGER          NOT NULL,
-	cpuUsage  INTEGER          NOT NULL,
-	memUsage  INTEGER          NOT NULL,
-	diskUsage INTEGER          NOT NULL,
-	hostname  VARCHAR(30)      NOT NULL,
-	gettime   DATETIME         NOT NULL
+CREATE TABLE `Machine`.`LoadAverage`(
+	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
+	gettime   DATETIME         NOT NULL,  /* 取得時間 */
+	ipaddr    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
+	la1min    FLOAT            NOT NULL,  /* 1min */
+	la5min    FLOAT            NOT NULL,  /* 5min */
+	la15min   FLOAT            NOT NULL   /* 10min */
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE `Machine`.`CPUUsage`(
+	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
+	gettime   DATETIME         NOT NULL,  /* 取得時間 */
+	ipaddr    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
+	cpuUsage  INTEGER          NOT NULL   /* CPU使用率 */
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE `Machine`.`MemUsage`(
+	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
+	gettime   DATETIME         NOT NULL,  /* 取得時間 */
+	ipaddr    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
+	memUsage  INTEGER          NOT NULL   /* メモリ使用率 */
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE `Machine`.`DiskUsage`(
+	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
+	gettime   DATETIME         NOT NULL,  /* 取得時間 */
+	ipaddr    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
+	diskUsage INTEGER          NOT NULL   /* Disk使用率 */
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE `Machine`.`Temperature`(
+	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
+	gettime   DATETIME         NOT NULL,  /* 取得時間 */
+	ipaddr    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
+	temperature INTEGER        NOT NULL   /* 温度 */
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
