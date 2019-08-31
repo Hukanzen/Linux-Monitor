@@ -1,19 +1,38 @@
-FROM debian:stretch
+FROM alpine
 
-# MAINTAINER Hukanzen
+RUN apk update && apk upgrade && apk add curl tar make gcc build-base wget gnupg
 
-RUN apt-get -y update && \
-	apt-get -y upgrade && \
-	apt-get -y install libcurl4-gnutls-dev make gcc g++ && \
-	apt-get -y autoremove && \
-	apt-get -y clean
+RUN mkdir -p /usr/src/perl /app
+WORKDIR /usr/src/perl
 
+RUN curl -SLO https://www.cpan.org/src/5.0/perl-5.30.0.tar.gz && \
+	tar --strip-components=1 -xzf perl-5.30.0.tar.gz -C /usr/src/perl && \
+	rm perl-5.30.0.tar.gz && \
+	./Configure -des \
+		-Duse64bitall \
+		-Dcccdlflags='-fPIC' \
+		-Dcccdlflags='-fPIC' \
+		-Dccdlflags='-rdynamic' \
+		-Dlocincpth=' ' \
+		-Duselargefiles \
+		-Dusethreads \
+		-Duseshrplib \
+		-Dd_semctl_semun \
+		-Dusenm && \
+	make libperl.so && \
+	make -j$(nproc) && \
+	true TEST_JOBS=$(nproc) make test_harness && \
+	make install
 
-WORKDIR /src
-COPY ["./src/","."]
-RUN make
+RUN curl -LO http://xrl.us/cpanm && \
+	chmod +x cpanm && \
+	./cpanm App::cpanminus && \
+	rm -fr ./cpanm /root/.cpanm /usr/src/perl
+	
+RUN cpanm Net::SNMP && cpanm Net::SNMP
 
+WORKDIR /app
 
-# CMD ["perl","main.pl"]
-# CMD /bin/bash
-CMD ["./client.out"]
+ADD ./src /app
+
+CMD perl main.pl
