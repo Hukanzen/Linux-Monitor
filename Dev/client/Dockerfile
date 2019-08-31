@@ -29,7 +29,7 @@ RUN curl -LO http://xrl.us/cpanm && \
 	./cpanm App::cpanminus && \
 	rm -fr ./cpanm /root/.cpanm /usr/src/perl
 	
-RUN cpanm Net::SNMP && cpanm Net::SNMP
+RUN cpanm Net::SNMP && cpanm DBI 
 
 WORKDIR /app
 
