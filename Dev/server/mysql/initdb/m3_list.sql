@@ -10,7 +10,7 @@ CREATE TABLE `List`.`Connection`(
 
 CREATE TABLE `List`.`MIBNodeOIDNumber`(
 	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
-	ipaddr    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
 	oid       VARCHAR(50) NOT NULL        /* マシン名 */
+	name      VARCHAR(30) NOT NULL        /* マシン名 */
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
