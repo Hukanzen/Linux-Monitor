@@ -10,7 +10,7 @@ CREATE TABLE `Machine`.`LoadAverage`(
 	la5min    FLOAT            NOT NULL,  /* 5min */
 	la15min   FLOAT            NOT NULL,  /* 10min */
 	FOREIGN KEY (ipaddridx) REFERENCES `List`.`Connection`(ID)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `Machine`.`CPUUsage`(
 	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
@@ -18,7 +18,7 @@ CREATE TABLE `Machine`.`CPUUsage`(
 	ipaddridx    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
 	cpuUsage  INTEGER          NOT NULL,   /* CPU使用率 */
 	FOREIGN KEY (ipaddridx) REFERENCES `List`.`Connection`(ID)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `Machine`.`MemUsage`(
 	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
@@ -26,7 +26,7 @@ CREATE TABLE `Machine`.`MemUsage`(
 	ipaddridx    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
 	memUsage  INTEGER          NOT NULL,   /* メモリ使用率 */
 	FOREIGN KEY (ipaddridx) REFERENCES `List`.`Connection`(ID)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `Machine`.`DiskUsage`(
 	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
@@ -34,7 +34,7 @@ CREATE TABLE `Machine`.`DiskUsage`(
 	ipaddridx    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
 	diskUsage INTEGER          NOT NULL,   /* Disk使用率 */
 	FOREIGN KEY (ipaddridx) REFERENCES `List`.`Connection`(ID)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `Machine`.`Temperature`(
 	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
@@ -42,5 +42,5 @@ CREATE TABLE `Machine`.`Temperature`(
 	ipaddridx    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
 	temperature INTEGER        NOT NULL,   /* 温度 */
 	FOREIGN KEY (ipaddridx) REFERENCES `List`.`Connection`(ID)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
