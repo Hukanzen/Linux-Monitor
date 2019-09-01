@@ -1,1 +1,0 @@
-/usr/local/bin/docker-compose -f /home/sun/Github/Linux-Monitor/Dev/client-docker-compose.yml up
