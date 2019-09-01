@@ -38,7 +38,7 @@ services:
       backend:
         ipv4_address: 10.0.1.10
     volumes:
-       - "./srv/mysql/initdb:/docker-entrypoint-initdb.d"
+       - "./server/mysql/initdb:/docker-entrypoint-initdb.d"
       #  - "./srv/mysql/db_data/:/var/lib/mysql"
     environment:
       MYSQL_ROOT_PASSWORD: password2018
