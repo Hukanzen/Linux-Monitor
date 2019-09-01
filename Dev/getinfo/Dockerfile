@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk update && apk upgrade && apk add curl tar make gcc build-base wget gnupg
+RUN apk --update add curl tar make gcc build-base wget gnupg mariadb-dev
 
 RUN mkdir -p /usr/src/perl /app
 WORKDIR /usr/src/perl
@@ -29,7 +29,7 @@ RUN curl -LO http://xrl.us/cpanm && \
 	./cpanm App::cpanminus && \
 	rm -fr ./cpanm /root/.cpanm /usr/src/perl
 	
-RUN cpanm Net::SNMP && cpanm DBI 
+RUN cpanm Net::SNMP && cpanm --force DBI
 
 WORKDIR /app
 
