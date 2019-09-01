@@ -40,6 +40,7 @@ services:
     volumes:
        - "./server/mysql/initdb:/docker-entrypoint-initdb.d"
       #  - "./srv/mysql/db_data/:/var/lib/mysql"
+       - "./server/mysql/my.cnf:/etc/mysql/my.cnf"
     environment:
       MYSQL_ROOT_PASSWORD: password2018
     expose:
