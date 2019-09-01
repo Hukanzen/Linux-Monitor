@@ -8,13 +8,14 @@ use Net::SNMP;
 
 use lib qw(./lib);   # ./lib配下を読み込む
 use mysqli_connection;
+use DBI;
 
 
+my $DB_ADDR='127.0.0.1';
 my $DB_NAME='List';
-my $DB_ADDR='mysql';
-my $PORT='3306';
+my $PORT='43306';
 my $USER='user1';
-my $PASS='password2018';
+my $PASS='password';
 
 my $db=mysqli_connection->new;
 $db->connect($DB_NAME,$DB_ADDR,$PORT,$USER,$PASS);
