@@ -10,7 +10,15 @@ CREATE TABLE `List`.`Connection`(
 
 CREATE TABLE `List`.`MIBNodeOIDNumber`(
 	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
-	oid       VARCHAR(50) NOT NULL,       /* マシン名 */
+	oid       VARCHAR(50) NOT NULL,       /* OID番号 */
 	name      VARCHAR(30) NOT NULL        /* マシン名 */
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `List`.`Combination`(
+	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
+	ipaddridx INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
+	oididx    INTEGER UNSIGNED NOT NULL,  /* マシン名 */
+	FOREIGN KEY (ipaddridx) REFERENCES `List`.`Connection`(ID),
+	FOREIGN KEY (oididx)    REFERENCES `List`.`MIBNodeOIDNumber`(ID)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 

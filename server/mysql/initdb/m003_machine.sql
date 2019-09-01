@@ -5,7 +5,7 @@ GRANT  INSERT,SELECT,UPDATE,CREATE ON `Machine`.* TO 'user1'@'%';
 CREATE TABLE `Machine`.`LoadAverage`(
 	ID  INTEGER UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY, /* 入力idx */
 	gettime   DATETIME         NOT NULL,  /* 取得時間 */
-	ipaddridx    INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
+	ipaddridx INTEGER UNSIGNED NOT NULL,  /* IPアドレス */
 	la1min    FLOAT            NOT NULL,  /* 1min */
 	la5min    FLOAT            NOT NULL,  /* 5min */
 	la15min   FLOAT            NOT NULL,  /* 10min */
