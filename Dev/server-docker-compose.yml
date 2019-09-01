@@ -43,6 +43,8 @@ services:
        - "./server/mysql/my.cnf:/etc/mysql/my.cnf"
     environment:
       MYSQL_ROOT_PASSWORD: password2018
+    ports:
+      - '43306:80'
     expose:
       - "3306"
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
